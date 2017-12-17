@@ -69,7 +69,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res) {
+app.use(function(err, req, res, next) {
 
     // Translating the error code to a error message with i18n depending on the language
     err.message = res.__(err.code);
