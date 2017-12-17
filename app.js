@@ -11,6 +11,31 @@ var users = require('./routes/users');
 var app = express();
 
 
+// Languages locales
+const i18n = require('i18n');
+
+i18n.configure({
+    // setup some locales - other locales default to en silently
+    locales:['en', 'es'],
+
+    // you may alter a site wide default locale
+    defaultLocale: 'es',
+
+    // query parameter to switch locale (ie. /home?lang=ch) - defaults to NULL
+    queryParameter: 'lang',
+
+    // where to store json files - defaults to './locales' relative to modules directory
+    directory: './locales',
+  
+    // setting prefix of json files name - default to none '' (in case you use different locale files naming scheme (webapp-en.json), rather then just en.json)
+    prefix: 'nodepop-',
+  
+    // Downcase locale when passed on queryParam; e.g. lang=en-US becomes
+    // en-us.  When set to false, the queryParam value will be used as passed;
+    // e.g. lang=en-US remains en-US.
+    preserveLegacyCase: true
+});
+
 // Connect to the mongoDB database
 require('./lib/mongooseConnect');
 
