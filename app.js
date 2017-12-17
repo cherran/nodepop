@@ -16,7 +16,6 @@ require('dotenv').config(); // Require and configure dotenv
 // Languages locales
 const i18n = require('i18n');
 const NodepopError = require('./lib/nodepopError');
-const debug = require('debug')('nodepop:app');
 
 i18n.configure({
     // setup some locales - other locales default to en silently
@@ -61,7 +60,7 @@ app.use(i18n.init);
 
 app.use('/', index);
 app.use('/apiv1/anuncios', anuncios);
-app.use('/apiv1/usuarios', usuarios)
+app.use('/apiv1/usuarios', usuarios);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -70,7 +69,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
 
     // Translating the error code to a error message with i18n depending on the language
     err.message = res.__(err.code);
