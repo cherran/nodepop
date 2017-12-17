@@ -1,5 +1,8 @@
 {
 	"WELCOME": "Bienvenido al API de Nodepop",
 	"ANUNCIOS_GET_ERROR": "Error obteniendo los anuncios",
-	"NOT_FOUND": "Recurso no encontrado"
+	"NOT_FOUND": "Recurso no encontrado",
+	"START_ERROR": "START_ERROR",
+	"LIMIT_ERROR": "LIMIT_ERROR",
+	"PRECIO_ERROR": "PRECIO_ERROR"
 }
