@@ -15,6 +15,12 @@ const NodepopError = require('../../lib/nodepopError');
 const validatePrecio = require('../../lib/precioUtils').validatePrecio;
 const convertPrecioToQueryFormat = require('../../lib/precioUtils').convertPrecioToQueryFormat;
 
+const jwtAuth = require('../../lib/jwAuth');
+
+
+// JWT auth
+router.use(jwtAuth());
+
 /**
  * GET /anuncios
  * Get a list of Anuncios
