@@ -7,7 +7,7 @@ const anuncioSchema = mongoose.Schema({
     venta: Boolean,
     precio: Number,
     foto: String,
-    tags: {type: String, enum: ['work', 'lifestyle', 'motor', 'mobile']}
+    tags: { type: [{ type: String, enum: ['work', 'lifestyle', 'motor', 'mobile'] }] }
 });
 
 
