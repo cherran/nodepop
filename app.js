@@ -14,6 +14,7 @@ var app = express();
 
 // Languages locales
 const i18n = require('i18n');
+const NodepopError = require('./lib/nodepopError');
 
 i18n.configure({
     // setup some locales - other locales default to en silently
@@ -61,8 +62,8 @@ app.use('/apiv1/anuncios', anuncios);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
+    var err = new NodepopError('NOT_FOUND', 404);
+    
     next(err);
 });
 

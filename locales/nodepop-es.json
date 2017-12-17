@@ -1,4 +1,5 @@
 {
 	"WELCOME": "Bienvenido al API de Nodepop",
-	"ANUNCIOS_GET_ERROR": "Error obteniendo los anuncios"
+	"ANUNCIOS_GET_ERROR": "Error obteniendo los anuncios",
+	"NOT_FOUND": "Recurso no encontrado"
 }
