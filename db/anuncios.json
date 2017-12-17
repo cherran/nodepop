@@ -13,6 +13,34 @@
             "precio": 50.00,
             "foto": "images/anuncios/iphone.png", 
             "tags": ["lifestyle", "mobile"]
+        },
+        {
+            "nombre": "iPhone 6 Plus",
+            "venta": false,
+            "precio": 400.25,
+            "foto": "images/anuncios/iphone6.png", 
+            "tags": ["work", "mobile"]
+        },
+        {
+            "nombre": "Volkswagen Golf",
+            "venta": true,
+            "precio": 12500.00,
+            "foto": "images/anuncios/golf.png", 
+            "tags": ["work", "mobile"]
+        },
+        {
+            "nombre": "Macbook Pro",
+            "venta": true,
+            "precio": 750.00,
+            "foto": "images/anuncios/macbook.png", 
+            "tags": ["work", "lifestyle"]
+        },
+        {
+            "nombre": "Vespino ",
+            "venta": false,
+            "precio": 300.00,
+            "foto": "images/anuncios/vespino.png", 
+            "tags": ["lifestyle", "motor"]
         }
     ]
 }
