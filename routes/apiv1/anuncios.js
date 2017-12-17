@@ -12,7 +12,8 @@ const { query, validationResult } = require('express-validator/check');
 const Anuncio = require('../../models/Anuncio');
 
 const NodepopError = require('../../lib/nodepopError');
-
+const validatePrecio = require('../../lib/precioUtils').validatePrecio;
+const convertPrecioToQueryFormat = require('../../lib/precioUtils').convertPrecioToQueryFormat;
 
 /**
  * GET /anuncios
@@ -23,6 +24,8 @@ router.get('/',
     query('tag').isIn(Anuncio.getTags()).withMessage('TAG_ERROR').optional(),
     query('nombre'),
     query('sort').isIn(Anuncio.getProps()).withMessage('SORT_ERROR').optional(),
+    query('precio').custom(validatePrecio).withMessage('PRECIO_ERROR'),
+
     async (req, res, next) => {
         debug('Query params:', req.query);
         try {
@@ -36,7 +39,7 @@ router.get('/',
                 const tag = req.query.tag;
                 const venta = req.query.venta;
                 const nombre = req.query.nombre;
-                const precio = req.query.precio;
+                const precio = convertPrecioToQueryFormat(req.query.precio);
                 const start = parseInt(req.query.start);
                 const limit = parseInt(req.query.limit);
                 const sort = req.query.sort;
@@ -47,6 +50,10 @@ router.get('/',
                 // RegEx to check if the property to check starts with nombre String
                 if (nombre) {
                     filters.nombre = new RegExp('^' + nombre, 'i');
+                }
+
+                if (precio) {
+                    filters.precio = precio;
                 }
 
                 const listResult = await Anuncio.list(filters, start, limit, sort);
