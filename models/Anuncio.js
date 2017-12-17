@@ -7,8 +7,18 @@ const anuncioSchema = mongoose.Schema({
     venta: Boolean,
     precio: Number,
     foto: String,
-    tags: [String]
+    tags: {type: String, enum: ['work', 'lifestyle', 'motor', 'mobile']}
 });
+
+
+
+anuncioSchema.statics.list = (filters) => {
+    const query = Anuncio.find(filters); // Not executing query yet
+
+    return query.exec(); // Executing query and returning it as a Promise
+};
+
+
 
 // Creating the model
 const Anuncio = mongoose.model('Anuncio', anuncioSchema);
