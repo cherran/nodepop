@@ -1,16 +1,15 @@
 {
-	"11000": 11000,
 	"WELCOME": "Bienvenido al API de Nodepop",
 	"ANUNCIOS_GET_ERROR": "Error obteniendo los anuncios",
 	"NOT_FOUND": "Recurso no encontrado",
-	"START_ERROR": "START_ERROR",
-	"LIMIT_ERROR": "LIMIT_ERROR",
-	"PRECIO_ERROR": "PRECIO_ERROR",
-	"USER_POST_ERROR": "USER_POST_ERROR",
-	"EMAIL_ERROR": "EMAIL_ERROR",
-	"EMAIL_DUPLICATED_ERROR": "EMAIL_DUPLICATED_ERROR",
-	"LOGIN_ERROR": "LOGIN_ERROR",
-	"LOGIN_NOUSER_ERROR": "LOGIN_NOUSER_ERROR",
-	"No token provided": "No token provided",
-	"Invalid token": "Invalid token"
+	"START_ERROR": "El parámetro 'start' debe ser numérico",
+	"LIMIT_ERROR": "El parámetro 'limit' debe ser numérico",
+	"PRECIO_ERROR": "El parámetro 'precio' debe ser numérico y seguir uno de estos patrones: 'precio', '-precio'. 'precio-', 'precio-precio2'",
+	"USER_POST_ERROR": "Error al crear el usuario",
+	"EMAIL_ERROR": "El parámetro 'email' debe ser una dirección de email válida",
+	"EMAIL_DUPLICATED_ERROR": "El email introducido ya existe en la base de datos",
+	"LOGIN_ERROR": "Error de autenticación",
+	"LOGIN_NOUSER_ERROR": "El usuario no se ha encontrado",
+	"NO_TOKEN_ERROR": "Falta el token para la autenticación",
+	"INVALID_TOKEN_ERROR": "token inválido"
 }

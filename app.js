@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 const anuncios = require('./routes/apiv1/anuncios');
-const usuarios = require('./routes/apiv1/usuarios');
+const usuarios = require('./routes/usuarios');
 
 var app = express();
 require('dotenv').config(); // Require and configure dotenv
@@ -60,7 +60,7 @@ app.use(i18n.init);
 
 app.use('/', index);
 app.use('/apiv1/anuncios', anuncios);
-app.use('/apiv1/usuarios', usuarios);
+app.use('/usuarios', usuarios);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -83,22 +83,10 @@ app.use(function(err, req, res) {
         }   
     }
 
-    if (isAPI(req)) {
-        res.status(err.status || 500);
-        res.json(errorResponse);
-    } else {
-        // set locals, only providing error in development
-        res.locals.message = err.message;
-        res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-        // render the error page
-        res.status(err.status || 500);
-        res.render('error');
-    }
+    
+    res.status(err.status || 500);
+    res.json(errorResponse);
 });
 
-function isAPI (req) {
-    return req.originalUrl.indexOf('/apiv') === 0;
-}
 
 module.exports = app;

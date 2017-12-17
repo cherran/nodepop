@@ -8,10 +8,10 @@ const router = express.Router();
 // express-validator
 const { check, validationResult } = require('express-validator/check');
 
-const NodepopError = require('../../lib/nodepopError');
+const NodepopError = require('../lib/nodepopError');
 
 // Load Anuncios model
-const Usuario = require('../../models/Usuario');
+const Usuario = require('../models/Usuario');
 
 const sha256 = require('sha256');
 const jwt = require('jsonwebtoken');

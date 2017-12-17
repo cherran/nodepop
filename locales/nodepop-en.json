@@ -1,5 +1,15 @@
 {
 	"WELCOME": "Welcome to Nodepop's API",
 	"ANUNCIOS_GET_ERROR": "Error getting anuncios",
-	"NOT_FOUND": "Resource not found"
+	"NOT_FOUND": "Resource not found",
+	"START_ERROR": "'start' parameter must be numeric",
+	"LIMIT_ERROR": "'limit' parameter must be numeric",
+	"PRECIO_ERROR": "'precio' parameter must be numeric and follow one of these patterns: 'precio', '-precio'. 'precio-', 'precio-precio2'",
+	"USER_POST_ERROR": "Error creating user",
+	"EMAIL_ERROR": "'email' parameter must be a valid email address",
+	"EMAIL_DUPLICATED_ERROR": "Email already in the database",
+	"LOGIN_ERROR": "Autentication error",
+	"LOGIN_NOUSER_ERROR": "User not found",
+	"NO_TOKEN_ERROR": "No token provided for autentication",
+	"INVALID_TOKEN_ERROR": "Invalid token"
 }
