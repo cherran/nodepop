@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev" : "DEBUG=nodepop:* nodemon ./bin/www",
-    "installDB" : "DEBUG=nodepop:* node db/installDB.js"
+    "dev": "DEBUG=nodepop:* nodemon ./bin/www",
+    "installDB": "DEBUG=nodepop:* node db/installDB.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -14,6 +14,7 @@
     "ejs": "~2.5.6",
     "eslint": "^4.13.1",
     "express": "~4.15.2",
+    "i18n": "^0.8.3",
     "mongoose": "^4.13.7",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"
