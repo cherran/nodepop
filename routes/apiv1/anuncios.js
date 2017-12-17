@@ -19,24 +19,44 @@ const NodepopError = require('../../lib/nodepopError');
  * Get a list of Anuncios
  */
 router.get('/',
-    query('venta').isBoolean().withMessage('must be a boolean'),
-    query('tag').isIn(Anuncio.getTags()).withMessage('No está en el enum'),
+    query('venta').isBoolean().withMessage('VENTA_ERROR').optional(),
+    query('tag').isIn(Anuncio.getTags()).withMessage('TAG_ERROR').optional(),
+    query('nombre'),
+    query('sort').isIn(Anuncio.getProps()).withMessage('SORT_ERROR').optional(),
     async (req, res, next) => {
+        debug('Query params:', req.query);
         try {
             const errors = validationResult(req)
-            
+            // validationResult(req).throw();
             if (!errors.isEmpty()) {
                 debug('There are validation errors:', errors.array());
             }
             else {
                 debug('Validation succeeded'); // Data from form is valid.
-                const filter = {};
-                const listResult = await Anuncio.list(filter);
+                const tag = req.query.tag;
+                const venta = req.query.venta;
+                const nombre = req.query.nombre;
+                const precio = req.query.precio;
+                const start = parseInt(req.query.start);
+                const limit = parseInt(req.query.limit);
+                const sort = req.query.sort;
+                
+                const filters = {};
+                if (venta) filters.venta = venta;
+                if (tag) filters.tags = tag;
+                // RegEx to check if the property to check starts with nombre String
+                if (nombre) {
+                    filters.nombre = new RegExp('^' + nombre, 'i');
+                }
+
+                const listResult = await Anuncio.list(filters, start, limit, sort);
                 res.json(listResult);
             }            
             errors.throw();
         } catch (errors) {
-            let err = new NodepopError('ANUNCIOS_GET_ERROR', 500, errors.array());
+            let err = (errors.array) ? 
+                new NodepopError('ANUNCIOS_GET_ERROR', 422, errors.array()) :
+                new NodepopError('ANUNCIOS_GET_ERROR', 500);
             next(err)
         }
 });
