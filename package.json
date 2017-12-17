@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "startCluster": "node ./bin/cluster",
     "dev": "DEBUG=nodepop:* nodemon ./bin/www",
     "devCluster": "DEBUG=nodepop:* nodemon ./bin/cluster",
     "installDB": "DEBUG=nodepop:* node db/installDB.js",
