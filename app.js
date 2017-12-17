@@ -10,11 +10,13 @@ var users = require('./routes/users');
 const anuncios = require('./routes/apiv1/anuncios');
 
 var app = express();
+require('dotenv').config(); // Require and configure dotenv
 
 
 // Languages locales
 const i18n = require('i18n');
 const NodepopError = require('./lib/nodepopError');
+const debug = require('debug')('nodepop:app');
 
 i18n.configure({
     // setup some locales - other locales default to en silently
@@ -63,12 +65,14 @@ app.use('/apiv1/anuncios', anuncios);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new NodepopError('NOT_FOUND', 404);
-    
     next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
+
+    debug('isAPI?:', isAPI(req));
+
     // Translating the error code to a error message with i18n depending on the language
     err.message = res.__(err.code);
     
@@ -80,5 +84,9 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+function isAPI (req) {
+    return req.originalUrl.indexOf('/apiv') === 0;
+}
 
 module.exports = app;

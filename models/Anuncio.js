@@ -18,7 +18,9 @@ anuncioSchema.statics.list = (filters) => {
     return query.exec(); // Executing query and returning it as a Promise
 };
 
-
+anuncioSchema.statics.getTags = () => {
+    return anuncioSchema.path('tags').caster.enumValues;
+};
 
 // Creating the model
 const Anuncio = mongoose.model('Anuncio', anuncioSchema);
