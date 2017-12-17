@@ -1,17 +1,21 @@
 'use strict';
 
+require('dotenv').config(); // Require and configure dotenv
+
 let debug = require('debug')('nodepop:installDB');
 
 // Connecting to the mongoDB database
 require('../lib/mongooseConnect');
 
 const Anuncio = require('../models/Anuncio');
+const Usuario = require('../models/Usuario');
 
 // Loading data from anuncios.json
 const json = require('./anuncios.json');
 
 
 const loadData = async (model, data) => {
+    if (!data) return;
     try {
         for(const item of data) {
             const itemModel = new model(item);
@@ -32,6 +36,7 @@ const installDataBase = async (model, data) => {
 
 
 installDataBase(Anuncio, json.anuncios)
+.then(installDataBase(Usuario, json.usuarios))
 .then(() => {
     debug('Sample DB installed');
     process.exit(0);

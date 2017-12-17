@@ -6,8 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 const anuncios = require('./routes/apiv1/anuncios');
+const usuarios = require('./routes/apiv1/usuarios');
 
 var app = express();
 require('dotenv').config(); // Require and configure dotenv
@@ -60,8 +60,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(i18n.init);
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/apiv1/anuncios', anuncios);
+app.use('/apiv1/usuarios', usuarios)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -75,13 +75,10 @@ app.use(function(err, req, res, next) {
     // Translating the error code to a error message with i18n depending on the language
     err.message = res.__(err.code);
     
-    let errorResponse = { error : { status: err.status, message: err.message } };
-    
-    errorResponse.reasons = [];
-    debug('err.validationError: ', err.validationErrors);
-    
+    let errorResponse = { error : { status: err.status, message: err.message } };   
     
     if (err.validationErrors) {
+        errorResponse.reasons = [];
         for (let i = 0; i < err.validationErrors.length; i++) {
             errorResponse.reasons.push(res.__(err.validationErrors[i].msg));
         }   
