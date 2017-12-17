@@ -1,4 +1,4 @@
-# Práctica JS/Node.js/MongoDB Boot VI (2017)
+# Nodepop API
 
 ## Cada anuncio muestra los siguientes datos:
 
