@@ -72,18 +72,33 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
 
-    debug('isAPI?:', isAPI(req));
-
     // Translating the error code to a error message with i18n depending on the language
     err.message = res.__(err.code);
     
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+    let errorResponse = { error : { status: err.status, message: err.message } };
+    
+    errorResponse.reasons = [];
+    debug('err.validationError: ', err.validationErrors);
+    
+    
+    if (err.validationErrors) {
+        for (let i = 0; i < err.validationErrors.length; i++) {
+            errorResponse.reasons.push(res.__(err.validationErrors[i].msg));
+        }   
+    }
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+    if (isAPI(req)) {
+        res.status(err.status || 500);
+        res.json(errorResponse);
+    } else {
+        // set locals, only providing error in development
+        res.locals.message = err.message;
+        res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+        // render the error page
+        res.status(err.status || 500);
+        res.render('error');
+    }
 });
 
 function isAPI (req) {

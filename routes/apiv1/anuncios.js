@@ -20,11 +20,13 @@ const convertPrecioToQueryFormat = require('../../lib/precioUtils').convertPreci
  * Get a list of Anuncios
  */
 router.get('/',
-    query('venta').isBoolean().withMessage('VENTA_ERROR').optional(),
     query('tag').isIn(Anuncio.getTags()).withMessage('TAG_ERROR').optional(),
+    query('venta').isBoolean().withMessage('VENTA_ERROR').optional(),
     query('nombre'),
+    query('precio').custom(validatePrecio).withMessage('PRECIO_ERROR').optional(),
+    query('start').isNumeric().withMessage('START_ERROR').optional(),
+    query('limit').isNumeric().withMessage('LIMIT_ERROR').optional(),
     query('sort').isIn(Anuncio.getProps()).withMessage('SORT_ERROR').optional(),
-    query('precio').custom(validatePrecio).withMessage('PRECIO_ERROR'),
 
     async (req, res, next) => {
         debug('Query params:', req.query);
