@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+const anuncios = require('./routes/apiv1/anuncios');
 
 var app = express();
 
@@ -52,8 +53,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(i18n.init);
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/apiv1/anuncios', anuncios);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -64,6 +68,9 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+    // Translating the error code to a error message with i18n depending on the language
+    err.message = res.__(err.code);
+    
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
